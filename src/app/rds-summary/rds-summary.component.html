@@ -1,0 +1,115 @@
+
+<div>
+  <p>
+    rds-summary works!
+  </p>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table id="example" name="example" class="table table-striped table-hover wb-tables" aria-live="polite"
+             role="grid"
+      >
+        <thead>
+        <tr>
+          <th style="width: 15%;">Drug/Device Name</th>
+          <th style="width: 25%;">Medicinal Ingredient</th>
+          <th style="width: 20%;">Manufacturer</th>
+          <th style="width: 10%;">Outcome</th>
+          <th style="width: 10%;">Decision Date</th>
+          <th style="width: 10%;">Control Number /Application Number</th>
+          <th style="width: 10%;">Type of Submission / Type of Application</th>
+        </tr>
+        </thead>
+      <!--  <tbody>
+        <tr *ngFor="let data of dataVals">
+          <td>{{data.drug_name}}</td>
+          <td>{{data.lastName}}</td>
+          <td>{{data.company}}</td>
+          <td>{{data.company}}</td>
+          <td>{{data.company}}</td>
+          <td>{{data.company}}</td>
+          <td>{{data.company}}</td>
+        </tbody>-->
+
+      </table>
+    </div>
+  </div>
+
+
+
+<script>
+
+
+ /*   $(".wb-tables").on("xhr.dt", function (event) {
+      alert("FD")
+    });
+    $(document).ready(function () {
+
+      $.getJSON("https://produits-sante.canada.ca/api/rapports-sommaires/api/regulatorydecision/?lang=en&type=json", function (data) {
+        dataVals = data;
+      }).done(function(data) {
+
+        var $table = $( "#example" );
+        //$table.removeClass( "wb-tables-inited wb-init" );
+        // $table.addClass( "wb-tables" );
+        var  columns= [
+          {"data": "drug_name"},
+          {"data": "medical_ingredient"},
+          {"data": "manufacturer", "type": "String"},
+          {"data": "decision", "type": "String"},
+          {"data": "date_decision", "type": "String"},
+          {"data": "control_number", "type": "String"},
+          {"data": "type_submission", "type": "String"},
+          {"data": "din", "type": "String", "visible": false},
+          {"data": "din_list", "type": "String", "visible": false},
+          {"data": "application_number", "type": "string", "visible": false},
+        ];
+        //$table.dataTable().fnDestroy();
+        //  $table.dataTable().empty();
+        $table.dataTable( {
+          data:dataVals,
+          "bDeferRender": false,
+          "aoColumns": columns,
+          "aaData": dataVals,
+          "destroy": true,
+          "columnDefs": [
+            {
+              "render": function (data, type, row) {
+                if (data) {
+                  return data
+                }
+                return row.application_number
+              },
+              "targets": 5
+            },
+            {
+              "render": function (data, type, row) {
+                if (row.is_md)
+                {
+                  return '<a href=regulatory-decision-summary-medical-device-detail.html?lang=en&linkID=' + row.link_id + '>' + data.toUpperCase() + '</a>';
+                }
+                else
+                {
+                  if (row.summary_title =='') {
+                    return '<a href=regulatory-decision-summary-detail.html?lang=en&linkID=' + row.link_id + '>' + data.toUpperCase() + '</a>';
+                  }
+                  else {
+                    return '<a href=regulatory-decision-summary-detailTwo.html?lang=en&linkID=' + row.link_id + '>' + data.toUpperCase() + '</a>';
+                  }
+                }
+              },
+              "targets": 0
+            },
+
+          ]
+        } );
+        $table.on( 'xhr', function () {
+          var json = table.ajax.json();
+          alert( json.data.length +' row(s) were loaded' );
+        } );
+      } );
+
+
+    });*/
+  </script>
+</div>
