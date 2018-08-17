@@ -6,9 +6,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <table id="example" name="example" class="table table-striped table-hover wb-tables" aria-live="polite"
-             role="grid"
-      >
+      <table datatable id="table1"  [dtOptions]="dtOptions"  [dtTrigger]="dtTrigger" class=" wb-tables row-border hover table table-striped table-hover table-bordered  no-footer">
         <thead>
         <tr>
           <th style="width: 15%;">Drug/Device Name</th>
@@ -19,31 +17,34 @@
           <th style="width: 10%;">Control Number /Application Number</th>
           <th style="width: 10%;">Type of Submission / Type of Application</th>
         </tr>
+
         </thead>
-      <!--  <tbody>
+        <tbody>
         <tr *ngFor="let data of dataVals">
           <td>{{data.drug_name}}</td>
-          <td>{{data.lastName}}</td>
-          <td>{{data.company}}</td>
-          <td>{{data.company}}</td>
-          <td>{{data.company}}</td>
-          <td>{{data.company}}</td>
-          <td>{{data.company}}</td>
-        </tbody>-->
-
+          <td>{{data.medical_ingredient}}</td>
+          <td>{{data.manufacturer}}</td>
+          <td>{{data.decision}}</td>
+          <td>{{data.date_decision}}</td>
+          <td>{{data.control_number}}</td>
+          <td>{{data.type_submission}}</td>
+        </tr>
+        </tbody>
       </table>
+
     </div>
+    <button (click)="rerender()">Click me!</button>
   </div>
 
 
 
-<script>
+<!--<script>
 
 
- /*   $(".wb-tables").on("xhr.dt", function (event) {
+   $(".wb-tables").on("xhr.dt", function (event) {
       alert("FD")
     });
-    $(document).ready(function () {
+    $(function () {
 
       $.getJSON("https://produits-sante.canada.ca/api/rapports-sommaires/api/regulatorydecision/?lang=en&type=json", function (data) {
         dataVals = data;
@@ -110,6 +111,6 @@
       } );
 
 
-    });*/
-  </script>
+    });
+  </script>-->
 </div>

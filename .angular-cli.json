@@ -5,12 +5,20 @@
   },
   "apps": [
     {
+      "name":"app1",
       "root": "src",
-      "outDir": "dist",
+      "outDir": "proj/dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "wet-boew",
+        "GCWeb",
+        { "glob": "**/*", "input": "../wet-boew/", "output": "../wet-boew/", "allowOutsideOutDir":true},
+
+        { "glob": "**/*", "input": "../GCWeb/", "output": "../GCWeb/", "allowOutsideOutDir":true}
+
       ],
+      "lib":{},
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
@@ -19,9 +27,14 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/datatables.net-dt/css/jquery.dataTables.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/datatables.net/js/jquery.dataTables.js",
+        "./assets/wet-boew.js"
+                  ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

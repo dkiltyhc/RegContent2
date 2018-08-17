@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { RdsSummaryComponent } from './rds-summary/rds-summary.component';
-
+import {DataTablesModule} from "angular-datatables";
 
 @NgModule({
   declarations: [
@@ -13,7 +13,8 @@ import { RdsSummaryComponent } from './rds-summary/rds-summary.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

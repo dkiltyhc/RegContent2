@@ -4,12 +4,15 @@
 <!--<![endif]-->
 <head>
 
-  <script type="text/javascript" src="https://www.canada.ca/etc/designs/canada/cdts/gcweb/rn/cdts/compiled/wet-en.js"></script>
-  <script type="text/javascript" src="https://www.canada.ca/etc/designs/canada/cdts/gcweb/rn/cdts/compiled/soyutils.js"></script>
+  <!--<script type="text/javascript" src="https://www.canada.ca/etc/designs/canada/cdts/gcweb/rn/cdts/compiled/wet-en.js"></script>
+   <script type="text/javascript" src="https://www.canada.ca/etc/designs/canada/cdts/gcweb/rn/cdts/compiled/soyutils.js"></script>-->
   <script type="text/javascript">
-    document.write(wet.builder.refTop({
-      cdnEnv:"prod"
-    }));
+    //wet=null;
+    if(typeof(wet) !== 'undefined') {
+      document.write(wet.builder.refTop({
+        cdnEnv: "prod"
+      }));
+    }
   </script>
 
   <noscript>
@@ -72,28 +75,49 @@
   f.parentNode.insertBefore(j, f);
 })(window, document, 'script', 'dataLayer1', 'GTM-TLGQ9K');</script>
 <!-- End Google Tag Manager -->
-<ul id="wb-tphp">
+<!--<ul id="wb-tphp">
   <li class="wb-slc">
     <a class="wb-sl" href="#wb-cont">Skip to main content</a>
   </li>
   <li class="wb-slc visible-sm visible-md visible-lg">
     <a class="wb-sl" href="#wb-info">Skip to "About this site"</a>
   </li>
-</ul>
+</ul>-->
 
 <div id="def-top">
-</div>
+<!-- /ROOT/cdts/static/top-en.html-->
+<!-- #include virtual="/cdts/static/top-en.html"-->
+
+</div >
 <script type="text/javascript">
   var defTop=document.getElementById("def-top");
-  defTop.outerHTML=wet.builder.top({
-    cdnEnv:"dev"
-    /*  breadcrumbs: [{title: "Home", href: "<!--build:homeAnchor--><!--endbuild-->"}],
+  if(typeof(wet) !== 'undefined') {
+    defTop.innerHTML = wet.builder.top({
+      cdnEnv: "dev"
+      /*  breadcrumbs: [{title: "Home", href: "<!--build:homeAnchor--><!--endbuild-->"}],
       lngLinks:[{
          lang:"fr",
           href:"<!--build:langHtml--><!--endbuild-->",
           text:"Français"
       }]*/
-  })
+    })
+  }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+<!--<script src="./assets/js/jquery.loadTemplate.min.js"></script>-->
+<script>
+  if(typeof(wet) === 'undefined') {
+    //$("#def-top").loadTemplate("cdts/static/top-en.html", null);
+    //$("#def-top").loadTemplate("cdts/static/top-en.html", null);
+   // var defFooter=document.getElementById("def-footer");
+   // $("#def-footer").loadTemplate("cdts/static/footer-en.html", null,null);
+  }
+
+
+  /*function loadTemplate(template, data, options){
+    return $('<div/>').loadTemplate(template, data, options).html();
+  }*/
+
 </script>
 <main role="main" property="mainContentOfPage" class="container">
 
@@ -103,7 +127,7 @@
     <noscript>
       <h2>JavaScript is required to complete this form</h2>
     </noscript>
-    <table id="example2" name="example" class="table table-striped table-hover wb-tables" aria-live="polite">
+   <!-- <table id="example2" name="example" class="table table-striped table-hover wb-tables" aria-live="polite">
       <thead>
       <tr>
         <th style="width: 15%;">Drug/Device Name</th>
@@ -115,7 +139,7 @@
         <th style="width: 10%;">Type of Submission / Type of Application</th>
       </tr>
       </thead>
-    </table>
+    </table>-->
     <app-root></app-root>
     <!-- inject:mainContent-->
     <!-- endinject-->
@@ -128,36 +152,68 @@
   </div>
   <script type="text/javascript">
     var defPreFooter=document.getElementById("def-preFooter");
-    defPreFooter.outerHTML=wet.builder.preFooter({
-      cdnEnv:"prod",
-      dateModified:"<!--build:dateToday--><!--endbuild-->",
-      showShare:false,
-      showFeedback:false
-    })
+    if(typeof(wet) !== 'undefined') {
+      defPreFooter.outerHTML = wet.builder.preFooter({
+        cdnEnv: "prod",
+        dateModified: "<!--build:dateToday--><!--endbuild-->",
+        showShare: false,
+        showFeedback: false
+      })
+    }
   </script>
-
+<div id="template-container"></div>
 </main>
 <div id="def-footer">
 
 </div>
+
 <script type="text/javascript">
   var defFooter=document.getElementById("def-footer");
-  defFooter.outerHTML=wet.builder.footer({
-    cdnEnv:"prod"
-  })
+  if(typeof(wet) !== 'undefined') {
+    defFooter.outerHTML = wet.builder.footer({
+      cdnEnv: "prod"
+    })
+  }
 </script>
+<!--<script>
+  $( document ).ready(function() {
 
+
+  (function($) {
+    /**
+     *  Namespace: the namespace the plugin is located under
+     *  pluginName: the name of the plugin
+     */
+    var extensionMethods = {
+      /*
+       * retrieve the id of the element
+       * this is some context within the existing plugin
+       */
+      showId: function(){
+        return this.element[0].id;
+      }
+    };
+
+    $.extend(true, $["dt.DT_details"][ DataTable ].prototype, extensionMethods);
+
+
+  })(jQuery);
+  });
+</script>-->
 
 <!--[if gte IE 9 | !IE ]><!-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
-<script src="./../wet-boew/js/wet-boew.min.js"></script>
+
+
+<script src="./wet-boew/js/wet-boew.min.js"></script>
+
+
 
 <!--<![endif]-->
 <!--[if lt IE 9]>
-<script src="../wet-boew/js/ie8-wet-boew2.min.js"></script>
+<script src="./wet-boew/js/ie8-wet-boew2.min.js"></script>
 
 <![endif]-->
-<script src="../GCWeb/js/theme.min.js"></script>
+<script src="./GCWeb/js/theme.min.js"></script>
 <!--Start add custom scripts here-->
 
 <!-- inject:js -->

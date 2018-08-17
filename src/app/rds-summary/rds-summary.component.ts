@@ -1,8 +1,12 @@
-import { Component, OnInit,AfterViewChecked,ChangeDetectionStrategy,ChangeDetectorRef } from '@angular/core';
-import * as $ from 'jquery';
+import { Component,OnDestroy, OnInit,AfterViewChecked,ChangeDetectionStrategy,ChangeDetectorRef,ViewChild,ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import 'datatables.net';
+import { DataTableDirective } from 'angular-datatables';
+//import $ from "jquery";
+
+import { Subject } from 'rxjs';
+import 'rxjs/add/operator/map';
 //declare var $: any;
+declare var jQuery: any;
 @Component({
   selector: 'app-rds-summary',
   templateUrl: './rds-summary.component.html',
@@ -10,91 +14,77 @@ import 'datatables.net';
   styleUrls: ['./rds-summary.component.css']
 })
 
-export class RdsSummaryComponent implements OnInit,AfterViewChecked {
+export class RdsSummaryComponent implements OnInit,OnDestroy {
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
   dataTable: any;
   dataVals:any[];
-  constructor(private http: HttpClient, private chRef: ChangeDetectorRef) { }
+  jquery: JQuery | any;
+
+
+  dtOptions: DataTables.Settings = {"paging":true};
+  dtTrigger = new Subject();
+
+  constructor(private http: HttpClient, private chRef: ChangeDetectorRef,private el: ElementRef) { }
 
   ngOnInit() {
-    //$( ".wb-tables" ).trigger( "wb-init.wb-tables" );
+
     this.http.get('https://produits-sante.canada.ca/api/rapports-sommaires/api/regulatorydecision/?lang=en&type=json')
       .subscribe((data:any[]) => {
         this.chRef.detectChanges();
         this.dataVals = data;
-        console.log(data);
-        // Now you can use jQuery DataTables :
-        $( ".wb-tables" ).trigger( "wb-init.wb-tables" );
-        const table: any = $('#example');
-        //this.dataTable = table.DataTable();
-        let $table = $("example" );
-        console.log($table)
+        console.log(this.dtTrigger)
+        this.dtTrigger.next();
       })
+  }
+  ngAfterViewInit(): void {
+    //this.dtTrigger.next();
+  /*  this.zone.runOutsideAngular(()=>{
+      this.$carousel = $(this.el.nativeElement);
+    });*/
+  }
+
+
+  onClickMe(){
+    console.log("i clicked")
+   console.log($(document));
+   console.log( jQuery("#table1").DataTable().showId());
+    $( "#table1" ).addClass( "wb-tables wb-init" );
+    $( "#table1" ).trigger( "wb-init.wb-tables" );
+
+    /**
+     // var $table = $( "#example" );
+     // $table.removeClass( "wb-tables-inited" ).addClass( "wb-init wb-tables" ).trigger( "wb-init.wb-tables" );
+     //$( ".wb-tables" ).trigger( "wb-init.wb-tables" );
+     // var $table = $( "#example" );
+     //  $table.removeClass( "wb-tables-inited" ).addClass( "wb-init wb-tables" ).trigger( "wb-init.wb-tables" );
+     //var link=https://hpr-rps.hres.ca/reg-content/regulatory-decision-summary-medical-device-detail.php?lang=en&linkID=RDS10001
+
+     */
 
 
   }
 
-  ngAfterViewChecked() {
-    const table: any = $('#example');
-    let self=this;
-    $( ".wb-tables" ).trigger( "wb-init.wb-tables" );
-    let $table = $("example" );
-    console.log(table);
-   // this.dataTable = table.DataTable();
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+  }
 
+  rerender(): void {
+    console.log( jQuery("#table1").DataTable());
+    jQuery("#table1").DataTable().init();
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      var $table = $( "#table1" );
+      console.log($)
+    //  console.log($("#table1").wbTables());
+      // Destroy the table first
+//      // Call the dtTrigger to rerender again
+      //$table.addClass( "wb-tables wb-init" );
 
-    var  columns= [
-      {"data": "drug_name"},
-      {"data": "medical_ingredient"},
-      {"data": "manufacturer", "type": "String"},
-      {"data": "decision", "type": "String"},
-      {"data": "date_decision", "type": "String"},
-      {"data": "control_number", "type": "String"},
-      {"data": "type_submission", "type": "String"},
-      {"data": "din", "type": "String", "visible": false},
-      {"data": "din_list", "type": "String", "visible": false},
-      {"data": "application_number", "type": "string", "visible": false},
-    ];
-    //const table: any = $('#example');
-    //this.dataTable = table.DataTable();
-    console.log(this.dataTable)
- /*   if($table.dataTable){
-    $table.dataTable({
-      data: dataVals,
-      "bDeferRender": false,
-      "aoColumns": columns,
-      "aaData": dataVals,
-      "destroy": true,
-      "columnDefs": [
-        {
-          "render": function (data, type, row) {
-            if (data) {
-              return data
-            }
-            return row.application_number
-          },
-          "targets": 5
-        },
-        {
-          "render": function (data, type, row) {
-            if (row.is_md) {
-              return '<a href=regulatory-decision-summary-medical-device-detail.html?lang=en&linkID=' + row.link_id + '>' + data.toUpperCase() + '</a>';
-            }
-            else {
-              if (row.summary_title == '') {
-                return '<a href=regulatory-decision-summary-detail.html?lang=en&linkID=' + row.link_id + '>' + data.toUpperCase() + '</a>';
-              }
-              else {
-                return '<a href=regulatory-decision-summary-detailTwo.html?lang=en&linkID=' + row.link_id + '>' + data.toUpperCase() + '</a>';
-              }
-            }
-          },
-          "targets": 0
-        },
-
-      ]
+      //$table.trigger( "wb-init.wb-tables" );
+     //this.dtTrigger.next();
+     // $( "#table1" ).trigger( "wb-init.wb-tables" );
     });
-    }*/
   }
-
 }
 
