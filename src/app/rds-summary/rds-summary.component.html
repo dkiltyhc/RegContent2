@@ -6,7 +6,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <table datatable id="table1"  [dtOptions]="dtOptions"  [dtTrigger]="dtTrigger" class=" wb-tables row-border hover table table-striped table-hover table-bordered  no-footer">
+      <table datatable id="table1"  [dtOptions]="dtOptions"  [dtTrigger]="dtTrigger" class=" row-border hover table table-striped table-hover table-bordered  no-footer">
         <thead>
         <tr>
           <th style="width: 15%;">Drug/Device Name</th>
@@ -36,81 +36,4 @@
     <button (click)="rerender()">Click me!</button>
   </div>
 
-
-
-<!--<script>
-
-
-   $(".wb-tables").on("xhr.dt", function (event) {
-      alert("FD")
-    });
-    $(function () {
-
-      $.getJSON("https://produits-sante.canada.ca/api/rapports-sommaires/api/regulatorydecision/?lang=en&type=json", function (data) {
-        dataVals = data;
-      }).done(function(data) {
-
-        var $table = $( "#example" );
-        //$table.removeClass( "wb-tables-inited wb-init" );
-        // $table.addClass( "wb-tables" );
-        var  columns= [
-          {"data": "drug_name"},
-          {"data": "medical_ingredient"},
-          {"data": "manufacturer", "type": "String"},
-          {"data": "decision", "type": "String"},
-          {"data": "date_decision", "type": "String"},
-          {"data": "control_number", "type": "String"},
-          {"data": "type_submission", "type": "String"},
-          {"data": "din", "type": "String", "visible": false},
-          {"data": "din_list", "type": "String", "visible": false},
-          {"data": "application_number", "type": "string", "visible": false},
-        ];
-        //$table.dataTable().fnDestroy();
-        //  $table.dataTable().empty();
-        $table.dataTable( {
-          data:dataVals,
-          "bDeferRender": false,
-          "aoColumns": columns,
-          "aaData": dataVals,
-          "destroy": true,
-          "columnDefs": [
-            {
-              "render": function (data, type, row) {
-                if (data) {
-                  return data
-                }
-                return row.application_number
-              },
-              "targets": 5
-            },
-            {
-              "render": function (data, type, row) {
-                if (row.is_md)
-                {
-                  return '<a href=regulatory-decision-summary-medical-device-detail.html?lang=en&linkID=' + row.link_id + '>' + data.toUpperCase() + '</a>';
-                }
-                else
-                {
-                  if (row.summary_title =='') {
-                    return '<a href=regulatory-decision-summary-detail.html?lang=en&linkID=' + row.link_id + '>' + data.toUpperCase() + '</a>';
-                  }
-                  else {
-                    return '<a href=regulatory-decision-summary-detailTwo.html?lang=en&linkID=' + row.link_id + '>' + data.toUpperCase() + '</a>';
-                  }
-                }
-              },
-              "targets": 0
-            },
-
-          ]
-        } );
-        $table.on( 'xhr', function () {
-          var json = table.ajax.json();
-          alert( json.data.length +' row(s) were loaded' );
-        } );
-      } );
-
-
-    });
-  </script>-->
 </div>
