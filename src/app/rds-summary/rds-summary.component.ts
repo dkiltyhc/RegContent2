@@ -1,13 +1,13 @@
-import { Component,OnDestroy, OnInit,AfterViewChecked,ChangeDetectionStrategy,ChangeDetectorRef,ViewChild,ElementRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { DataTableDirective } from 'angular-datatables';
+import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {DataTableDirective} from 'angular-datatables';
 import {TranslateService} from '@ngx-translate/core';
-//import $ from "jquery";
-
-import { Subject } from 'rxjs';
+import {Subject} from 'rxjs';
 import 'rxjs/add/operator/map';
+//import $ from "jquery";
 //declare var $: any;
 declare var jQuery: any;
+
 @Component({
   selector: 'app-rds-summary',
   templateUrl: './rds-summary.component.html',
@@ -15,198 +15,224 @@ declare var jQuery: any;
   styleUrls: ['../../GCWeb/css/theme.css']
 })
 
-export class RdsSummaryComponent implements OnInit,OnDestroy {
+export class RdsSummaryComponent implements OnInit, OnDestroy {
   @ViewChild(DataTableDirective)
   dtElement: DataTableDirective;
   dataTable: any;
-  dataVals:any[];
+  dataVals: any[];
   jquery: JQuery | any;
-  dtOptions: DataTables.Settings = {"paging":true};
-  dtTrigger = new Subject();
-  filterText:string;
-  sortAsc:string;
-  sortDesc:string;
-  emptyTbl:string;
-  infoFilt:string;
-  load:string;
-  first:string;
-  last:string;
-  next:string;
-  prv:string;
-  page:string;
-  process:string;
-  info1000:string;
-  infoEmpty:string;
-  infoEntr:string;
-  lenMenu:string;
-  jsonUrl:string;
-  constructor(private http: HttpClient, private chRef: ChangeDetectorRef,private el: ElementRef,translate: TranslateService) {
+  dtOptions;
+  filterText: string;
+  sortAsc: string;
+  sortDesc: string;
+  emptyTbl: string;
+  infoFilt: string;
+  load: string;
+  first: string;
+  last: string;
+  next: string;
+  prv: string;
+  page: string;
+  process: string;
+  info1000: string;
+  infoEmpty: string;
+  infoEntr: string;
+  lenMenu: string;
+  jsonUrl: string;
+  lang: string;
+  dtTrigger: Subject<any> = new Subject();
+
+  constructor(private http: HttpClient, private chRef: ChangeDetectorRef, private el: ElementRef, translate: TranslateService) {
     /**
-           translate.setTranslation('en', {
+     translate.setTranslation('en', {
           HELLO: 'hello {{value}}'
       });
      */
 
     translate.get('table.sortAsc').subscribe((res: string) => {
 
-      this.sortAsc=res;
+      this.sortAsc = res;
     });
     translate.get('table.sortDesc').subscribe((res: string) => {
 
-      this.sortDesc=res;
+      this.sortDesc = res;
     });
     translate.get('table.infoEmpty').subscribe((res: string) => {
 
-      this.infoEmpty=res;
+      this.infoEmpty = res;
     });
 
     translate.get('table.filter').subscribe((res: string) => {
 
-      this.filterText=res;
+      this.filterText = res;
     });
     translate.get('table.emptyTbl').subscribe((res: string) => {
 
-      this.emptyTbl=res;
+      this.emptyTbl = res;
     });
     translate.get('table.infoFilt').subscribe((res: string) => {
 
-      this.infoFilt=res;
+      this.infoFilt = res;
     });
     translate.get('table.load').subscribe((res: string) => {
 
-      this.load=res;
+      this.load = res;
     });
     translate.get('table.first').subscribe((res: string) => {
 
-      this.first=res;
+      this.first = res;
     });
     translate.get('table.last').subscribe((res: string) => {
 
-      this.last=res;
+      this.last = res;
     });
     translate.get('table.next').subscribe((res: string) => {
 
-      this.next=res;
+      this.next = res;
     });
     translate.get('table.prv').subscribe((res: string) => {
 
-      this.prv=res;
+      this.prv = res;
     });
     translate.get('table.page').subscribe((res: string) => {
 
-      this.page=res;
+      this.page = res;
     });
     translate.get('table.process').subscribe((res: string) => {
 
-      this.process=res;
+      this.process = res;
     });
     translate.get('table.info1000').subscribe((res: string) => {
 
-      this.info1000=res;
+      this.info1000 = res;
     });
     translate.get('table.infoEmpty').subscribe((res: string) => {
 
-      this.infoEmpty=res;
+      this.infoEmpty = res;
     });
     translate.get('table.infoEntr').subscribe((res: string) => {
 
-      this.infoEntr=res;
+      this.infoEntr = res;
     });
     translate.get('table.lenMenu').subscribe((res: string) => {
-      this.lenMenu=res;
+      this.lenMenu = res;
     });
-
-    this.jsonUrl='https://produits-sante.canada.ca/api/rapports-sommaires/api/regulatorydecision/?lang='+translate.currentLang+'&type=json';
+    this.lang = translate.currentLang;
+    this.jsonUrl = 'https://produits-sante.canada.ca/api/rapports-sommaires/api/regulatorydecision/?lang=' + this.lang + '&type=json';
   }
 
   ngOnInit() {
 
-
+    this.dtOptions={};
+    this.dtOptions.order=[4, 'desc'];
     this.http.get(this.jsonUrl)
-      .subscribe((data:any[]) => {
+      .subscribe((data: any[]) => {
 
-        this.dataVals = data;
-        var $elm = $( ".ng-wt-tbl" );
-        let i18nText = {
-          aria: {
-            sortAscending: ( this.sortAsc),
-            sortDescending: ( this.sortDesc )
-          },
-          emptyTable: ( this.emptyTbl ),
-          info: (this.infoEntr ),
+        setTimeout(() => {
+          this._processData(data, this.lang);
 
-          infoEmpty: ( this.infoEmpty ),
-          infoFiltered: ( this.infoFilt ),
-          lengthMenu: ( this.lenMenu ),
-          loadingRecords: ( this.load),
-          paginate: {
-            first: ( this.first ),
-            last: ( this.last ),
-            next: ( this.next ),
-            previous: ( this.prv ),
-            page: ( this.page )
-          },
-          processing: ( this.process ),
-          search: ( this.filterText ),
-          thousands: ( this.info1000 ),
-          zeroRecords: ( this.infoEmpty )
 
-        };
+          this.dataVals = data;
+          var $elm = $(".ng-wt-tbl");
+          let i18nText = {
+            aria: {
+              sortAscending: (this.sortAsc),
+              sortDescending: (this.sortDesc)
+            },
+            emptyTable: (this.emptyTbl),
+            info: (this.infoEntr),
 
-       this.chRef.detectChanges();
-        $elm.DataTable(	{
-          language: i18nText,
-          dom: "<'top'fil>rt<'bottom'p><'clear'>"
+            infoEmpty: (this.infoEmpty),
+            infoFiltered: (this.infoFilt),
+            lengthMenu: (this.lenMenu),
+            loadingRecords: (this.load),
+            paginate: {
+              first: (this.first),
+              last: (this.last),
+              next: (this.next),
+              previous: (this.prv),
+              page: (this.page)
+            },
+            processing: (this.process),
+            search: (this.filterText),
+            thousands: (this.info1000),
+            zeroRecords: (this.infoEmpty)
+
+          };
+          this.dtOptions.order=[4, 'desc'];
+          this.chRef.detectChanges();
+          this.dtOptions.order=[4, 'desc'];
+          $elm.DataTable({
+            language: i18nText,
+            order:[4, 'desc'],
+            dom: "<'top'fil>rt<'bottom'p><'clear'>"
+          });
+          //sorting icons
+          $elm.find("th").append("<span class='sorting-cnt'><span class='sorting-icons'></span></span>");
+
+          var pagination = $elm.next(".bottom").find("div:first-child"),
+            paginate_buttons = $elm.next(".bottom").find(".paginate_button"),
+            ol = document.createElement("OL"),
+            li = document.createElement("LI");
+
+          // Update Pagination List
+          for (var i = 0; i < paginate_buttons.length; i++) {
+            var item = li.cloneNode(true);
+            item.appendChild(paginate_buttons[i]);
+            ol.appendChild(item);
+          }
+
+          ol.className = "pagination mrgn-tp-0 mrgn-bttm-0";
+          pagination.empty();
+          pagination.append(ol);
+
+          // Update the aria-pressed properties on the pagination buttons
+          // Should be pushed upstream to DataTables
+          $elm.next(".bottom").find(".paginate_button")
+            .attr({
+              "role": "button",
+              "href": "javascript:;"
+            })
+            .not(".previous, .next")
+            .attr("aria-pressed", "false")
+            .html(function (index, oldHtml) {
+              return "<span class='wb-inv'>" + i18nText.paginate.page + " </span>" + oldHtml;
+            })
+            .filter(".current")
+            .attr("aria-pressed", "true");
+
         });
-        //sorting icons
-        $elm.find( "th" ).append( "<span class='sorting-cnt'><span class='sorting-icons'></span></span>" );
-
-       var pagination = $elm.next( ".bottom" ).find( "div:first-child" ),
-          paginate_buttons = $elm.next( ".bottom" ).find( ".paginate_button" ),
-          ol = document.createElement( "OL" ),
-          li = document.createElement( "LI" );
-
-        // Update Pagination List
-        for ( var i = 0; i < paginate_buttons.length; i++ ) {
-          var item = li.cloneNode( true );
-          item.appendChild( paginate_buttons[ i ] );
-          ol.appendChild( item );
-        }
-
-        ol.className = "pagination mrgn-tp-0 mrgn-bttm-0";
-        pagination.empty();
-        pagination.append( ol );
-
-        // Update the aria-pressed properties on the pagination buttons
-        // Should be pushed upstream to DataTables
-        $elm.next( ".bottom" ).find( ".paginate_button" )
-          .attr( {
-            "role": "button",
-            "href": "javascript:;"
-          } )
-          .not( ".previous, .next" )
-          .attr( "aria-pressed", "false" )
-          .html( function( index, oldHtml ) {
-            return "<span class='wb-inv'>" + i18nText.paginate.page + " </span>" + oldHtml;
-          } )
-          .filter( ".current" )
-          .attr( "aria-pressed", "true" );
-
-        this.chRef.detectChanges();
-      // this.dtTrigger.next();
-
       })
   }
+
   ngAfterViewInit(): void {
 
+    this.dtOptions.order=[4, 'desc'];
+    //this.dtTrigger.next();
   }
-
 
 
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
+
   }
+
+  /**
+   * Add the hyperlink to the drug name to get the details page
+   * @param data
+   * @param lang
+   * @private
+   */
+  _processData(data, lang) {
+    data.forEach(function (rec) {
+      let temp = '<a href="regulatory-decision-summary-medical-device-detail.php?lang=' + lang + '&amp;linkID=' + rec.link_id + '">' + rec.drug_name + '</a>';
+      rec.drug_name = temp;
+    });
+
+
+  }
+
 
 }
 

@@ -20,7 +20,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let data of dataVals">
-          <td>{{data.drug_name}}</td>
+          <td [innerHTML]=data.drug_name></td>
           <td>{{data.medical_ingredient}}</td>
           <td>{{data.manufacturer}}</td>
           <td>{{data.decision}}</td>
