@@ -25,21 +25,91 @@ export class RdsSummaryComponent implements OnInit,OnDestroy {
   dtTrigger = new Subject();
   filterText:string;
   sortAsc:string;
+  sortDesc:string;
+  emptyTbl:string;
+  infoFilt:string;
+  load:string;
+  first:string;
+  last:string;
+  next:string;
+  prv:string;
+  page:string;
+  process:string;
+  info1000:string;
   infoEmpty:string;
+  infoEntr:string;
+  lenMenu:string;
   constructor(private http: HttpClient, private chRef: ChangeDetectorRef,private el: ElementRef,translate: TranslateService) {
 
     translate.get('table.sortAsc').subscribe((res: string) => {
-      console.log(res);
+
       this.sortAsc=res;
     });
+    translate.get('table.sortDesc').subscribe((res: string) => {
+
+      this.sortDesc=res;
+    });
     translate.get('table.infoEmpty').subscribe((res: string) => {
-      console.log(res);
+
       this.infoEmpty=res;
     });
 
+    translate.get('table.filter').subscribe((res: string) => {
 
-   // "table.sortAsc": "activate for ascending sort	&#160",
-      //"table.infoFilt":"(filtered from _MAX_ total entries)"
+      this.filterText=res;
+    });
+    translate.get('table.emptyTbl').subscribe((res: string) => {
+
+      this.emptyTbl=res;
+    });
+    translate.get('table.infoFilt').subscribe((res: string) => {
+
+      this.infoFilt=res;
+    });
+    translate.get('table.load').subscribe((res: string) => {
+
+      this.load=res;
+    });
+    translate.get('table.first').subscribe((res: string) => {
+
+      this.first=res;
+    });
+    translate.get('table.last').subscribe((res: string) => {
+
+      this.last=res;
+    });
+    translate.get('table.next').subscribe((res: string) => {
+
+      this.next=res;
+    });
+    translate.get('table.prv').subscribe((res: string) => {
+
+      this.prv=res;
+    });
+    translate.get('table.page').subscribe((res: string) => {
+
+      this.page=res;
+    });
+    translate.get('table.process').subscribe((res: string) => {
+
+      this.process=res;
+    });
+    translate.get('table.info1000').subscribe((res: string) => {
+
+      this.info1000=res;
+    });
+    translate.get('table.infoEmpty').subscribe((res: string) => {
+
+      this.infoEmpty=res;
+    });
+    translate.get('table.infoEntr').subscribe((res: string) => {
+
+      this.infoEntr=res;
+    });
+    translate.get('table.lenMenu').subscribe((res: string) => {
+      this.lenMenu=res;
+    });
+
   }
 
   ngOnInit() {
@@ -49,29 +119,31 @@ export class RdsSummaryComponent implements OnInit,OnDestroy {
       .subscribe((data:any[]) => {
 
         this.dataVals = data;
-        var $elm = $( "#table1" );
+        var $elm = $( ".ng-wt-tbl" );
         let i18nText = {
           aria: {
             sortAscending: ( this.sortAsc),
-            sortDescending: ( "sortDesc" )
+            sortDescending: ( this.sortDesc )
           },
-          emptyTable: ( "emptyTblTag" ),
+          emptyTable: ( this.emptyTbl ),
+          info: (this.infoEntr ),
 
           infoEmpty: ( this.infoEmpty ),
-          infoFiltered: ( "infoFilt" ),
-
-          loadingRecords: ( "load" ),
+          infoFiltered: ( this.infoFilt ),
+          lengthMenu: ( this.lenMenu ),
+          loadingRecords: ( this.load),
           paginate: {
-            first: ( "First" ),
-            last: ( "Last" ),
-            next: ( "Next" ),
-            previous: ( "prv" ),
-            page: ( "page" )
+            first: ( this.first ),
+            last: ( this.last ),
+            next: ( this.next ),
+            previous: ( this.prv ),
+            page: ( this.page )
           },
-          processing: ( "process" ),
+          processing: ( this.process ),
           search: ( this.filterText ),
-          thousands: ( "info1000" ),
-          zeroRecords: ( "infoEmpty" )
+          thousands: ( this.info1000 ),
+          zeroRecords: ( this.infoEmpty )
+
         };
 
        this.chRef.detectChanges();

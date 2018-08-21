@@ -1,8 +1,18 @@
 {
-
-
-"table.sortAsc": "activate for ascending sort	&#160",
+"table.sortAsc": "activate for ascending sort",
+  "table.sortDesc": ": activate for descending sort",
   "table.infoFilt":"(filtered from _MAX_ total entries)",
-  "table.infoEmpty":"Showing 0 to 0 of 0 entries"
-
+  "table.infoEmpty":"Showing 0 to 0 of 0 entries",
+  "table.filter":"Filter items",
+  "table.infoEntr":"Showing _START_ to _END_ of _TOTAL_ entries",
+  "table.emptyTbl":"No data is available in the table",
+  "table.load":"loading...",
+  "table.first":"First",
+  "table.last":"Last",
+  "table.next":"Next",
+  "table.prv":"Previous",
+  "table.page":"Page",
+  "table.process":"processing...",
+  "table.info1000":",",
+  "table.lenMenu":"Show _MENU_ entries"
 }

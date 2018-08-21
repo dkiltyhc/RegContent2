@@ -1,6 +1,18 @@
 {
-
-  "table.sortAsc": "activer pour tri ascendant",
+  "table.sortAsc": "&#160;: activer pour tri ascendant",
+  "table.sortDesc": "&#160;: activer pour tri descendant",
+  "table.infoEmpty":"Affiche 0 à 0 de 0 entrées",
+  "table.filter":"Filtrer les articles",
+  "table.emptyTbl":"Aucune donnée n'est disponible dans le tableau",
   "table.infoFilt":"(filtré de _MAX_ entrées totales)",
-  "table.infoEmpty":"Affiche 0 à 0 de 0 entrées"
+  "table.infoEntr":"Affiche _START_ à _END_ de _TOTAL_ entrées",
+  "table.load":"chargement...",
+  "table.first":"Premier",
+  "table.last":"Dernier",
+  "table.next":"Suivant",
+  "table.prv":"Précédent",
+  "table.page":"Page",
+  "table.process":"traitement...",
+  "table.info1000":"&#160;",
+  "table.lenMenu":"Afficher _MENU_ entrées"
 }
