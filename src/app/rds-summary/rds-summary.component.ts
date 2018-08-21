@@ -39,7 +39,13 @@ export class RdsSummaryComponent implements OnInit,OnDestroy {
   infoEmpty:string;
   infoEntr:string;
   lenMenu:string;
+  jsonUrl:string;
   constructor(private http: HttpClient, private chRef: ChangeDetectorRef,private el: ElementRef,translate: TranslateService) {
+    /**
+           translate.setTranslation('en', {
+          HELLO: 'hello {{value}}'
+      });
+     */
 
     translate.get('table.sortAsc').subscribe((res: string) => {
 
@@ -110,12 +116,13 @@ export class RdsSummaryComponent implements OnInit,OnDestroy {
       this.lenMenu=res;
     });
 
+    this.jsonUrl='https://produits-sante.canada.ca/api/rapports-sommaires/api/regulatorydecision/?lang='+translate.currentLang+'&type=json';
   }
 
   ngOnInit() {
 
 
-    this.http.get('https://produits-sante.canada.ca/api/rapports-sommaires/api/regulatorydecision/?lang=en&type=json')
+    this.http.get(this.jsonUrl)
       .subscribe((data:any[]) => {
 
         this.dataVals = data;

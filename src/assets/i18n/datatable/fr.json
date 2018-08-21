@@ -14,5 +14,12 @@
   "table.page":"Page",
   "table.process":"traitement...",
   "table.info1000":"&#160;",
-  "table.lenMenu":"Afficher _MENU_ entrées"
+  "table.lenMenu":"Afficher _MENU_ entrées",
+  "summary.hd.name":"Nom du médicament ou de l'appareil",
+  "summary.hd.mi":"Ingrédient(s) médicinal(aux)",
+  "summary.hd.man":"Fabricant",
+  "summary.hd.outcome":"Décision",
+  "summary.hd.decisDate":"Date de décision",
+  "summary.hd.control":"Numéro de contrôle / Numérmo de demande",
+  "summary.hd.typeHtml":"Type de présentation / Type&nbsp;de&nbsp;demande"
 }

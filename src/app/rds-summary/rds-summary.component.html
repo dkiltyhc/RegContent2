@@ -9,15 +9,14 @@
       <table datatable id="table1"  [dtOptions]="dtOptions"  [dtTrigger]="dtTrigger" class=" row-border hover table table-striped table-hover table-bordered  no-footer ng-wt-tbl">
         <thead>
         <tr>
-          <th style="width: 15%;">Drug/Device Name</th>
-          <th style="width: 25%;">Medicinal Ingredient</th>
-          <th style="width: 20%;">Manufacturer</th>
-          <th style="width: 10%;">Outcome</th>
-          <th style="width: 10%;">Decision Date</th>
-          <th style="width: 10%;">Control Number /Application Number</th>
-          <th style="width: 10%;">Type of Submission / Type of Application</th>
+          <th style="width: 15%;">{{'summary.hd.name' |translate}}</th>
+          <th style="width: 25%;">{{'summary.hd.mi' |translate}}</th>
+          <th style="width: 20%;">{{'summary.hd.man' |translate}}</th>
+          <th style="width: 10%;">{{'summary.hd.outcome' |translate}}</th>
+          <th style="width: 10%;">{{'summary.hd.decisDate' |translate}}</th>
+          <th style="width: 10%;">{{'summary.hd.control' |translate}}</th>
+          <th style="width: 10%;"[innerHTML]="'summary.hd.typeHtml' | translate"></th>
         </tr>
-
         </thead>
         <tbody>
         <tr *ngFor="let data of dataVals">

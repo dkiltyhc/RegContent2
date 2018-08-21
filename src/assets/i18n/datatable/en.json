@@ -14,5 +14,14 @@
   "table.page":"Page",
   "table.process":"processing...",
   "table.info1000":",",
-  "table.lenMenu":"Show _MENU_ entries"
+  "table.lenMenu":"Show _MENU_ entries",
+
+  "summary.hd.name":"Drug / device Name",
+  "summary.hd.mi":"Medicinal ingredient",
+  "summary.hd.man":"Manufacturer",
+  "summary.hd.outcome":"Outcome",
+  "summary.hd.decisDate":"Decision date",
+  "summary.hd.control":"Control number / Application number",
+  "summary.hd.typeHtml":"Type of submission / Type&nbsp;of application"
+
 }
