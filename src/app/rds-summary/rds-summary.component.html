@@ -20,7 +20,9 @@
           </thead>
           <tbody>
           <tr *ngFor="let data of dataVals">
-            <td [innerHTML]=data.drug_name></td>
+            <td>
+              <a class="nav-link"  routerLink="/summary-details/"  routerLinkActive="active">{{data.drug_name}}</a>
+            </td>
             <td>{{data.medical_ingredient}}</td>
             <td>{{data.manufacturer}}</td>
             <td>{{data.decision}}</td>
@@ -35,5 +37,5 @@
 
     </div>
 
-
+<!--  <router-outlet></router-outlet>-->
   </div>

@@ -9,7 +9,9 @@ import {DataTablesModule} from "angular-datatables";
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {WetDatatableModule} from "./wet-datatable/wet-datatable.module";
-import {WetDatatableDirective} from "./wet-datatable/wet-datatable.directive";
+import { RouterModule, Routes } from '@angular/router';
+import {SummaryDetailsComponent} from "./summary-details/summary-details/summary-details.component";
+import {SummaryDetailsModule} from "./summary-details/summary-details.module";
 
 
 
@@ -27,9 +29,18 @@ import {WetDatatableDirective} from "./wet-datatable/wet-datatable.directive";
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
-      }
+      },
+
     }),
-    WetDatatableModule
+    RouterModule.forRoot(
+      [{ path: 'summary-details', component: SummaryDetailsComponent },
+
+      ],
+      { enableTracing: true } // <-- debugging purposes only
+    ),
+    WetDatatableModule,
+    SummaryDetailsModule
+
 
   ],
   exports: [
