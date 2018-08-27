@@ -8,6 +8,8 @@ import {DataTablesModule} from "angular-datatables";
 
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {WetDatatableModule} from "./wet-datatable/wet-datatable.module";
+import {WetDatatableDirective} from "./wet-datatable/wet-datatable.directive";
 
 
 
@@ -27,10 +29,11 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
         deps: [HttpClient]
       }
     }),
+    WetDatatableModule
+
   ],
   exports: [
-    TranslateModule,
-
+    TranslateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

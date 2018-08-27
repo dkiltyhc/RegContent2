@@ -6,6 +6,9 @@ import { WetDatatableDirective } from './wet-datatable.directive';
   imports: [
     CommonModule
   ],
+  exports:[
+    WetDatatableDirective
+  ],
   declarations: [WetDatatableDirective]
 })
 export class WetDatatableModule { }
