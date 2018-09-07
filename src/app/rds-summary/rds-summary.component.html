@@ -21,7 +21,7 @@
           <tbody>
           <tr *ngFor="let data of dataVals">
             <td>
-              <a class="nav-link"  routerLink="/summary-details/"  routerLinkActive="active">{{data.drug_name}}</a>
+              <a class="nav-link"  routerLink="/summary-details/{{data.link_id}}"  routerLinkActive="active">{{data.drug_name}}</a>
             </td>
             <td>{{data.medical_ingredient}}</td>
             <td>{{data.manufacturer}}</td>

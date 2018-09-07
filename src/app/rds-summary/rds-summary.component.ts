@@ -1,7 +1,7 @@
 import { Component, OnInit,AfterViewInit,Renderer} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {TranslateService} from '@ngx-translate/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-rds-summary',
@@ -16,10 +16,12 @@ export class RdsSummaryComponent implements OnInit,AfterViewInit {
   lang: string;
   jsonUrl:string;
   dataVals=[];
+  linkId="";
 
-  constructor(private http: HttpClient, private translate: TranslateService,private renderer: Renderer, private router: Router) {
+  constructor(private http: HttpClient, private translate: TranslateService, private route: ActivatedRoute) {
     this.lang = translate.currentLang;
     this.jsonUrl = 'https://produits-sante.canada.ca/api/rapports-sommaires/api/regulatorydecision/?lang=' + this.lang + '&type=json';
+    this.linkId=route.snapshot.params['id']
   }
 
   ngOnInit() {
@@ -46,6 +48,7 @@ export class RdsSummaryComponent implements OnInit,AfterViewInit {
       //let temp = '<a   routerLink="/summary-details"  routerLinkActive="active">' + rec.drug_name + ' </a>';
     // console.log(temp)
      // rec.drug_name = temp;
+      //https://hpr-rps.hres.ca/reg-content/regulatory-decision-summary-detail.php?lang=en&linkID=RDS00401
     });
   }
 
