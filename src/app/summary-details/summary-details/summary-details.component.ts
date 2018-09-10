@@ -13,6 +13,9 @@ export class SummaryDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      console.log(params.id)
+    });
   }
 
 }

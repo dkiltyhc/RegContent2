@@ -61,7 +61,18 @@ export class RdsSummaryComponent implements OnInit,AfterViewInit {
       }
     });*/
   }
+  /*public gotoProductDetailsV2(url, id) {
+    var myurl = `${url}/${id}`;
+    console.log(myurl);
 
+    this.router.navigateByUrl(myurl).then(e => {
+      if (e) {
+        console.log("Navigation is successful!");
+      } else {
+        console.log("Navigation has failed!");
+      }
+    });
+  }*/
 
 }
 

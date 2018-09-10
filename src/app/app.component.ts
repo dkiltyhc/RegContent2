@@ -5,9 +5,9 @@ import {TranslateService} from '@ngx-translate/core';
 import { Router, Routes } from '@angular/router';
 import {SummaryDetailsComponent} from "./summary-details/summary-details/summary-details.component";
 
-const routes: Routes = [
+/*const routes: Routes = [
   { path: 'summary-details/:id', component: SummaryDetailsComponent }
-];
+];*/
 
 @Component({
   selector: 'app-root',

@@ -12,7 +12,7 @@ import {WetDatatableModule} from "./wet-datatable/wet-datatable.module";
 import { RouterModule, Routes } from '@angular/router';
 import {SummaryDetailsComponent} from "./summary-details/summary-details/summary-details.component";
 import {SummaryDetailsModule} from "./summary-details/summary-details.module";
-
+import {routingModule}  from "./routing/routing.module";
 
 
 @NgModule({
@@ -21,6 +21,7 @@ import {SummaryDetailsModule} from "./summary-details/summary-details.module";
     RdsSummaryComponent
   ],
   imports: [
+    routingModule,
     BrowserModule,
     HttpClientModule,
     DataTablesModule,
@@ -32,14 +33,10 @@ import {SummaryDetailsModule} from "./summary-details/summary-details.module";
       },
 
     }),
-    RouterModule.forRoot(
-      [{ path: 'summary-details', component: SummaryDetailsComponent },
 
-      ],
-      { enableTracing: true } // <-- debugging purposes only
-    ),
     WetDatatableModule,
-    SummaryDetailsModule
+    SummaryDetailsModule,
+
 
 
   ],
