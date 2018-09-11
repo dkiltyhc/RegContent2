@@ -32,6 +32,7 @@ export class RdsSummaryComponent implements OnInit,AfterViewInit {
         setTimeout(() => {
          this._processData(data, this.lang);
           this.dataVals = data;
+          console.log(this.dataVals);
         })
       })
   }
